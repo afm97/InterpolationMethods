@@ -1,7 +1,8 @@
-float NaturalSpline(int rows, int cols, float data[rows][cols], float b[rows][1]){
+float NaturalSpline(int rows, int cols, float data[rows][cols], float b[rows][2]){
     
     float A[rows][cols]; A[rows][cols] = zeros(rows,cols,A);
-    b[rows][1] = zeros(rows,1,b); 
+    b[rows][2] = zeros(rows,2,b); 
+    
 
     float h_0, h_1, a_0, a_1, a_2;
 
@@ -24,4 +25,8 @@ float NaturalSpline(int rows, int cols, float data[rows][cols], float b[rows][1]
     }
 
     gaussianElimination(rows,A,b);
+
+    for(int j = 0; j < rows - 2; j++){
+        b[j][1] = (1/(data[j+1][1] - data[j][1]))*(b[j+1][0] - b[j][0]);
+    }
 }
