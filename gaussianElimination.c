@@ -1,4 +1,4 @@
-void gaussianElimination(int rows, float matrix[rows][rows], float solution[rows][1]) {
+void gaussianElimination(int rows, float matrix[rows][rows], float solution[rows][2]) {
     
     float ratio = 0, sol_aux;
 
