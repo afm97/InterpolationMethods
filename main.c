@@ -5,21 +5,31 @@
 #include "printMatrix.c"
 #include "gaussianElimination.c"
 #include "naturalSpline.c"
+#include "fixedSpline.c"
 
-int main(){
+#define e 2.7182818285
 
-    int rows = 3, cols = 3;
+int main()
+{
 
-    float solution[rows][2];
+    float data[][3] = {{0, 1, 1},
+                       {1, e, 0},
+                       {2, pow(e, 2), 0},
+                       {3, pow(e, 3), pow(e, 3)}};
 
-    float data[][3] = { {1.3, 0.6200860, -0.5220232},
-                         {1.6, 0.4554022, -0.5698959},
-                         {1.9, 0.2818186, -0.5811571} };
+    int rows = sizeof(data) / sizeof(data[0]);
+    int cols = sizeof(data[0]) / sizeof(data[0][0]);
 
-    NaturalSpline(rows,cols,data,solution);
-    printMatrix(rows,2,solution);
+    float constants[rows][3];
 
-    //printf("O tamanho da matrix é: %d \n",N_Collums);
-    //printf("O endereco da matrix data é: %p\n",&data);
+    NaturalSpline(rows, cols, data, constants);
+    printf("Coeficientes para spline livre\n");
+    printMatrix(rows, 3, constants);
+    printf("--------------------------------------\n");
+
+    FixedSpline(rows, cols, data, constants);
+    printf("Coeficientes para spline fixa\n");
+    printMatrix(rows, 3, constants);
+    printf("--------------------------------------\n");
+
 }
-
