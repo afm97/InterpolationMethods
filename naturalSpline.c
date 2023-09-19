@@ -2,6 +2,7 @@ float NaturalSpline(int rows, int cols, float data[rows][cols], float constants[
 {
     /*A função recebe o numero de linhas e colunas de uma matriz de pontos e retorna uma matriz com as constantes dos polinõmios*/
     /*A matriz constante possui a seguinte estrutura constant[][3] = {coef.b, coef.c, coef.d}*/
+    /*A matriz A consiste na matriz principal do método*/
 
     float A[rows][rows];
     A[rows][rows] = zeros(rows, rows, A);
